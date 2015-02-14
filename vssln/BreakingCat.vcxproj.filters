@@ -62,5 +62,13 @@
     <Filter Include="Header Files">
       <UniqueIdentifier>{99bfdd7b-4798-4a12-9a74-01dfb64b9fed}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Other Files">
+      <UniqueIdentifier>{413b7801-5bfc-4923-9731-e8d50c58b6f3}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\ReadMe.txt">
+      <Filter>Other Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>
