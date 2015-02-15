@@ -3,12 +3,16 @@
 #include<windows.h>
 #include<gl/gl.h>
 #include<gl/glu.h>
+#include<mmsystem.h>
+#include<strsafe.h>
 
-#define COUNT_OF_SYMBOLS 57
+#define COUNT_OF_SYMBOLS_IN_FONT 57
 #define WINDOW_WIDTH 800
 #define WINDOW_HEIGHT 600
 #define WINDOW_NAME L"96k"
 #define WINDOW_STYLE WS_OVERLAPPED | WS_SYSMENU | WS_CLIPSIBLINGS | WS_CLIPCHILDREN
+#define TILE_SIZE_X WINDOW_WIDTH / 80
+#define TILE_SIZE_Y WINDOW_HEIGHT / 60
 
 #ifndef __FLTUSED__
 #define __FLTUSED__
@@ -22,7 +26,7 @@ typedef struct
 
 typedef struct tagBCFONT
 {
-	unsigned int _textures[COUNT_OF_SYMBOLS];
+	unsigned int _textures[COUNT_OF_SYMBOLS_IN_FONT];
 }bcFont;
 
 typedef enum { false, true } bool;

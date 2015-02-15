@@ -1,7 +1,7 @@
 #include"tcbm.h"
 #include"texture.h"
 
-void bcTCBMConvertToTexture(char* _tcbmSource, unsigned int _texture, const unsigned char _tcbmWidth, const unsigned char _tcbmHeight, const unsigned int _color)
+void bcTCBMConvertToTexture(char* _tcbmSource, unsigned int _texture, const unsigned char _tcbmWidth, const unsigned char _tcbmHeight, const unsigned int _color, const unsigned int _color2)
 {
 	unsigned int size = _tcbmWidth * _tcbmHeight;
 	char* textureData = (char*)LocalAlloc(LPTR, size * 4);
@@ -23,10 +23,10 @@ void bcTCBMConvertToTexture(char* _tcbmSource, unsigned int _texture, const unsi
 		}
 		else
 		{
-			textureData[k] = 0x00;
-			textureData[k + 1] = 0x00;
-			textureData[k + 2] = 0x00;
-			textureData[k + 3] = 0x00;
+			textureData[k] = (_color2 >> 24) & 0x000000FF;
+			textureData[k + 1] = (_color2 >> 16) & 0x000000FF;
+			textureData[k + 2] = (_color2 >> 8) & 0x000000FF;
+			textureData[k + 3] = _color2 & 0x000000FF;
 		}
 
 		k += 4;

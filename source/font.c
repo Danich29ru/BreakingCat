@@ -3,17 +3,17 @@
 #include"common.h"
 
 
-Font bcCreateFont(const unsigned int _color)
+Font bcCreateFont(const unsigned int _color, const unsigned int _color2)
 {
 	int i = 0;
 
 	if (g_CountOfFonts >= 31)
 		return 0;
 
-	for (i = 0; i < COUNT_OF_SYMBOLS; i++)
+	for (i = 0; i < COUNT_OF_SYMBOLS_IN_FONT; i++)
 	{
 		g_Fonts[g_CountOfFonts]._textures[i] = bcCreateTexture();
-		bcTCBMConvertToTexture(bcGetSymbol(i), g_Fonts[g_CountOfFonts]._textures[i], SYMBOL_WIDTH, SYMBOL_HEIGHT, _color);
+		bcTCBMConvertToTexture(bcGetSymbol(i), g_Fonts[g_CountOfFonts]._textures[i], SYMBOL_WIDTH, SYMBOL_HEIGHT, _color, _color2);
 	}
 
 	return (g_CountOfFonts);
