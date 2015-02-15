@@ -25,7 +25,7 @@ void __inline bcGameLoop()
 	UINT FPS = 0;
 	UINT FPSTemp = 0;
 
-	Rect fpsRect;
+	bcRect fpsRect;
 
 	wchar_t fpsText[10] = L"50";
 
@@ -34,7 +34,7 @@ void __inline bcGameLoop()
 	fpsRect._bottom = 15;
 	fpsRect._right = 50;
 
-	g_YellowFont = bcCreateFont(0xFFFF00FF, 0x000000FF);
+	g_YellowFont = bcCreateFont(0xFFFF0000, 0x0000FFFF);
 
 	do
 	{

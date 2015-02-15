@@ -36,10 +36,10 @@ void bcDrawTexture(Texture _texture, unsigned int _x, unsigned int _y, unsigned 
 
 	glBindTexture(GL_TEXTURE_2D, _texture);
 
-	x = (double)_x / (double)WINDOW_WIDTH;
-	y = (double)_y / (double)WINDOW_HEIGHT;
-	w = ((double)_width * (double)_pixelsize) / (double)WINDOW_WIDTH;
-	h = ((double)_height * (double)_pixelsize) / (double)WINDOW_HEIGHT;
+	x = _x;
+	y = _y;
+	w = ((double)_width * (double)_pixelsize);
+	h = ((double)_height * (double)_pixelsize);
 
 	glBegin(GL_QUADS);
 	glTexCoord2d(1.0, 0.0);

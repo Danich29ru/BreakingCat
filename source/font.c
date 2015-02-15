@@ -32,10 +32,10 @@ void bcDeleteFont(Font* _font)
 }
 
 
-void bcDrawText(Font _font, wchar_t* _text, const unsigned char _pixelScale, Rect _rc)
+void bcDrawText(Font _font, wchar_t* _text, const unsigned char _pixelScale, bcRect _rc)
 {
 	unsigned int lenght = lstrlenW(_text);
-	unsigned int charSize = (_pixelScale * 8) + 1;
+	unsigned int charSize = (_pixelScale * 8);
 	unsigned int freeSpaceX = _rc._left - _rc._right;
 	unsigned int freeSpaceY = _rc._top - _rc._bottom;
 	unsigned int row = 0;

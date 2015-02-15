@@ -75,13 +75,16 @@ bool __inline bcInitGL()
 void __inline bcGLSetStartValues()
 {
 	glEnable(GL_TEXTURE_2D);
-	//glShadeModel(GL_FLAT);
-	//glEnable(GL_BLEND);
-	//glBlendFunc(GL_ONE, GL_ONE);
+
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_ONE, GL_ONE);
+	glEnable(GL_ALPHA_TEST);
+	glAlphaFunc(GL_EQUAL, GL_ZERO);
+	
 
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	glOrtho(0.0, 1.0, 1.0, 0.0, 0.2, 100.0);
+	glOrtho(0.0, WINDOW_WIDTH, WINDOW_HEIGHT, 0.0, -1.0, 100.0);
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
