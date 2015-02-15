@@ -2,15 +2,6 @@
 #include"symbols.h"
 #include"common.h"
 
-#define COUNT_OF_SYMBOLS 57
-
-typedef struct tagBCFONT
-{
-	Texture _textures[COUNT_OF_SYMBOLS];
-}bcFontRU;
-
-static bcFontRU g_Fonts[32];
-static unsigned char g_CountOfFonts = 0;
 
 Font bcCreateFont(const unsigned int _color)
 {
@@ -21,8 +12,8 @@ Font bcCreateFont(const unsigned int _color)
 
 	for (i = 0; i < COUNT_OF_SYMBOLS; i++)
 	{
-		g_Fonts[g_CountOfFonts]._textures[i] = CreateTexture();
-		tcbmConvertToTexture(GetSymbol(i), g_Fonts[g_CountOfFonts]._textures[i], SYMBOL_WIDTH, SYMBOL_HEIGHT);
+		g_Fonts[g_CountOfFonts]._textures[i] = bcCreateTexture();
+		bcTCBMConvertToTexture(bcGetSymbol(i), g_Fonts[g_CountOfFonts]._textures[i], SYMBOL_WIDTH, SYMBOL_HEIGHT, _color);
 	}
 
 	return (g_CountOfFonts);
@@ -34,7 +25,7 @@ void bcDeleteFont(Font* _font)
 	int i = 0;
 	for (i = 0; i < 32; i++)
 	{
-		DeleteTexture(&(g_Fonts[(*_font)]._textures[i]));
+		bcDeleteTexture(&(g_Fonts[(*_font)]._textures[i]));
 	}
 
 	(*_font) = 0;
@@ -133,7 +124,7 @@ void bcDrawText(Font _font, wchar_t* _text, const unsigned char _pixelScale, Rec
 			charID = (_text[i] - L'0') + 47;
 		}
 
-		DrawTexture(g_Fonts[_font]._textures[charID], x, y, SYMBOL_WIDTH, SYMBOL_HEIGHT, _pixelScale);
+		bcDrawTexture(g_Fonts[_font]._textures[charID], x, y, SYMBOL_WIDTH, SYMBOL_HEIGHT, _pixelScale);
 
 	}
 }

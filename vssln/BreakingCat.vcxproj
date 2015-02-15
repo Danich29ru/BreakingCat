@@ -110,13 +110,12 @@
   <ItemGroup>
     <ClCompile Include="..\source\font.c" />
     <ClCompile Include="..\source\symbols.c" />
-    <ClCompile Include="..\source\common.c" />
     <ClCompile Include="..\source\game.c" />
     <ClCompile Include="..\source\glwnd.c" />
     <ClCompile Include="..\source\main.c" />
     <ClCompile Include="..\source\tcbm.c" />
     <ClCompile Include="..\source\texture.c" />
-    <ClCompile Include="..\source\world.c" />
+    <ClCompile Include="..\source\vars.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\source\font.h" />
@@ -126,7 +125,7 @@
     <ClInclude Include="..\source\glwnd.h" />
     <ClInclude Include="..\source\tcbm.h" />
     <ClInclude Include="..\source\texture.h" />
-    <ClInclude Include="..\source\world.h" />
+    <ClInclude Include="..\source\vars.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\ReadMe.txt" />

@@ -120,7 +120,7 @@ char symbols[] =
 	0x1E, 0x3F, 0x33, 0x3F, 0x1F, 0x03, 0x3F, 0x1E,
 };
 
-char* GetSymbol(const unsigned char _symbolNumber)
+char* bcGetSymbol(const unsigned char _symbolNumber)
 {
 	return &(symbols[_symbolNumber * 8]);
 }

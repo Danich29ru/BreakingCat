@@ -2,7 +2,7 @@
 #include"font.h"
 
 
-void __inline GameLoop()
+void __inline bcGameLoop()
 {
 	MSG msg;
 
@@ -14,12 +14,13 @@ void __inline GameLoop()
 			DispatchMessage(&msg);
 		}
 		
-		BeginRender();
+		bcBeginRender();
+
 		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();
 		glTranslatef(0.0f, 0.0f, -1.0f);
 
-		EndRender();
+		bcEndRender();
 		
 	}while(true != g_IsExit);
 }

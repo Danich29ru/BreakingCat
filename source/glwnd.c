@@ -1,6 +1,6 @@
 #include"glwnd.h"
 
-LRESULT WINAPI WndProc(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam)
+LRESULT WINAPI bcWndProc(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam)
 {
 	switch (Msg)
 	{
@@ -13,7 +13,7 @@ LRESULT WINAPI WndProc(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam)
 	return DefWindowProc(hWnd, Msg, wParam, lParam);
 }
 
-bool __inline InitWnd()
+bool __inline bcInitWnd()
 {
 	WNDCLASS wc = { 0 };
 
@@ -25,7 +25,7 @@ bool __inline InitWnd()
 	wc.hCursor = LoadCursor(0, IDC_ARROW);
 	wc.hIcon = NULL;
 	wc.hInstance = g_pInst;
-	wc.lpfnWndProc = WndProc;
+	wc.lpfnWndProc = bcWndProc;
 	wc.lpszClassName = WINDOW_NAME;
 	wc.lpszMenuName = 0;
 	wc.style = CS_OWNDC;
@@ -48,7 +48,7 @@ bool __inline InitWnd()
 }
 
 
-bool __inline InitGL()
+bool __inline bcInitGL()
 {
 	int pixelFormat;
 	PIXELFORMATDESCRIPTOR pfd = { 0 };
@@ -72,7 +72,7 @@ bool __inline InitGL()
 }
 
 
-void __inline GLSetStartValues()
+void __inline bcGLSetStartValues()
 {
 	glEnable(GL_TEXTURE_2D);
 	//glShadeModel(GL_FLAT);
@@ -88,7 +88,7 @@ void __inline GLSetStartValues()
 }
 
 
-void __inline ShutdownWnd()
+void __inline bcShutdownWnd()
 {
 	if (g_hWnd)
 	{
@@ -99,20 +99,20 @@ void __inline ShutdownWnd()
 }
 
 
-void __inline ShutdownGL()
+void __inline bcShutdownGL()
 {
 	wglMakeCurrent(0, 0);
 	wglDeleteContext(g_hGLRc);
 }
 
 
-void __inline BeginRender()
+void __inline bcBeginRender()
 {
 	glClear(GL_COLOR_BUFFER_BIT);
 }
 
 
-void __inline EndRender()
+void __inline bcEndRender()
 {
 	SwapBuffers(g_hDC);
 }

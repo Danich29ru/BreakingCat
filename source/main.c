@@ -1,20 +1,19 @@
 #include"common.h"
-#include<locale.h>
 
 void main()
 {
 	
-	if(false == InitWnd())
+	if(!bcInitWnd())
 		ExitProcess(EXIT_FAILURE);
-	if(false == InitGL())
+	if(!bcInitGL())
 		ExitProcess(EXIT_FAILURE);
 
-	GLSetStartValues();
+	bcGLSetStartValues();
 
-	GameLoop();
+	bcGameLoop();
 
-	ShutdownGL();
-	ShutdownWnd();
+	bcShutdownGL();
+	bcShutdownWnd();
 
 	ExitProcess(EXIT_SUCCESS);
 }

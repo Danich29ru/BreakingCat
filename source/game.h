@@ -2,4 +2,4 @@
 
 #include"common.h"
 
-extern void GameLoop();
+extern void bcGameLoop();

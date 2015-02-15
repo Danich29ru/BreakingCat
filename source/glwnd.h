@@ -2,10 +2,10 @@
 
 #include"common.h"
 
-extern bool InitWnd();
-extern bool InitGL();
-extern void ShutdownWnd();
-extern void ShutdownGL();
-extern void GLSetStartValues();
-extern void BeginRender();
-extern void EndRender();
+extern bool bcInitWnd();
+extern bool bcInitGL();
+extern void bcShutdownWnd();
+extern void bcShutdownGL();
+extern void bcGLSetStartValues();
+extern void bcBeginRender();
+extern void bcEndRender();

@@ -1,6 +1,6 @@
 #include"texture.h"
 
-Texture CreateTexture()
+Texture bcCreateTexture()
 {
 	GLuint texture = 0;
 	glGenTextures(1, &texture);
@@ -8,14 +8,14 @@ Texture CreateTexture()
 }
 
 
-void DeleteTexture(Texture* _texture)
+void bcDeleteTexture(Texture* _texture)
 {
 	glDeleteTextures(1, _texture);
 	(*_texture) = 0;
 }
 
 
-void SetTextureData(Texture _texture, unsigned char _width, unsigned char _height, unsigned char* _data)
+void bcSetTextureData(Texture _texture, unsigned char _width, unsigned char _height, unsigned char* _data)
 {
 	if(_texture == 0)
 		return;
@@ -30,7 +30,7 @@ void SetTextureData(Texture _texture, unsigned char _width, unsigned char _heigh
 }
 
 
-void DrawTexture(Texture _texture, unsigned int _x, unsigned int _y, unsigned char _width, unsigned char _height, unsigned char _pixelsize)
+void bcDrawTexture(Texture _texture, unsigned int _x, unsigned int _y, unsigned char _width, unsigned char _height, unsigned char _pixelsize)
 {
 	double x, y, w, h;
 

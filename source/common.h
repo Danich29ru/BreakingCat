@@ -4,14 +4,11 @@
 #include<gl/gl.h>
 #include<gl/glu.h>
 
-#define MAX_STRING_SIZE 10240
-
+#define COUNT_OF_SYMBOLS 57
 #define WINDOW_WIDTH 800
 #define WINDOW_HEIGHT 600
 #define WINDOW_NAME L"96k"
 #define WINDOW_STYLE WS_OVERLAPPED | WS_SYSMENU | WS_CLIPSIBLINGS | WS_CLIPCHILDREN
-
-typedef enum { false, true } bool;
 
 #ifndef __FLTUSED__
 #define __FLTUSED__
@@ -23,14 +20,19 @@ typedef struct
 	unsigned int _top, _bottom, _left, _right;
 }Rect;
 
+typedef struct tagBCFONT
+{
+	unsigned int _textures[COUNT_OF_SYMBOLS];
+}bcFont;
+
+typedef enum { false, true } bool;
+typedef unsigned char Font;
+typedef unsigned int Texture;
+
 #pragma comment(linker,"/SECTION:.text,ERW")
 #pragma comment(linker,"/MERGE:.rdata=.text")
 
-extern bool g_IsExit;
-extern HWND g_hWnd;
-extern HDC g_hDC;
-extern HGLRC g_hGLRc;
-extern HINSTANCE g_pInst;
+#include"vars.h"
 
 #include"glwnd.h"
 #include"game.h"
