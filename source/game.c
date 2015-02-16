@@ -12,6 +12,7 @@ void __inline bcRenderUI()
 
 }
 
+
 void __inline bcRender()
 {
 	bcRenderGameObjects();
@@ -25,6 +26,22 @@ void __inline bcUpdate()
 }
 
 
+void __inline bcGameInit()
+{
+	bcMapObject centralLab;
+	centralLab._type = BC_MAP_TEXTURE_LAB1;
+	centralLab._x = 5;
+	centralLab._y = 5;
+	bcAddObjectMap(centralLab);
+}
+
+
+void __inline bcGameShutdown()
+{
+
+}
+
+
 void __inline bcGameLoop()
 {
 	MSG msg;
@@ -35,7 +52,6 @@ void __inline bcGameLoop()
 	UINT FPS = 0;
 	bcRect fpsRect;
 	wchar_t fpsText[10] = L"0";
-	bcMapObject lab = { BC_MAP_TEXTURE_LAB1, 200, 200, 64, 64 };
 
 	fpsRect._top = 5;
 	fpsRect._left = 5;
@@ -45,7 +61,8 @@ void __inline bcGameLoop()
 	g_YellowFont = bcCreateFont(0xFFFF0000, 0x0000FFFF);
 
 	bcInitMap();
-	bcAddObjectMap(lab);
+
+	bcGameInit();
 
 	do
 	{
@@ -64,8 +81,8 @@ void __inline bcGameLoop()
 			bcBeginRender();
 			glMatrixMode(GL_MODELVIEW);
 			glLoadIdentity();
-			bcDrawText(g_YellowFont, fpsText, 2, fpsRect);
 			bcRender();
+			bcDrawText(g_YellowFont, fpsText, 2, fpsRect);
 			bcEndRender();
 			
 			if (elapsedTime >= 1000.0)
@@ -85,6 +102,8 @@ void __inline bcGameLoop()
 		}
 		
 	}while(true != g_IsExit);
+
+	bcGameShutdown();
 
 	bcFreeMap();
 	bcDeleteFont(&g_YellowFont);

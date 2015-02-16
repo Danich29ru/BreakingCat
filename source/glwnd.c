@@ -76,8 +76,8 @@ void __inline bcGLSetStartValues()
 {
 	glEnable(GL_TEXTURE_2D);
 
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_ONE, GL_ONE);
+	//glEnable(GL_BLEND);
+	//glBlendFunc(GL_ONE, GL_ONE);
 	glEnable(GL_ALPHA_TEST);
 	glAlphaFunc(GL_EQUAL, GL_ZERO);
 	

@@ -13,6 +13,8 @@
 #define COUNT_OF_SYMBOLS_IN_FONT 57
 #define MAP_MAX_OBJECTS 128
 
+#define UIBAR_SIZE 100
+
 #ifndef __FLTUSED__
 #define __FLTUSED__
    __declspec(selectany) int _fltused = 1;
@@ -33,7 +35,6 @@ typedef struct tagBCMAPOBJECT
 {
 	unsigned char _type;
 	unsigned int _x, _y;
-	unsigned int _width, _height;
 }bcMapObject;
 
 typedef enum { false, true } bool;
@@ -43,6 +44,7 @@ typedef unsigned int Texture;
 enum E_MAP_TEXTURE
 {
 	BC_MAP_TEXTURE_BACKGROUND = 0,
+	BC_MAP_TEXTURE_GREEN_QUAD,
 	BC_MAP_TEXTURE_LAB1,
 	BC_MAP_TEXTURES_COUNT
 };
