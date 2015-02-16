@@ -32,7 +32,7 @@ void bcDeleteFont(Font* _font)
 }
 
 
-void bcDrawText(Font _font, wchar_t* _text, const unsigned char _pixelScale, bcRect _rc)
+void bcDrawText(Font _font, wchar_t* _text, const int _pixelScale, bcRect _rc)
 {
 	unsigned int lenght = lstrlenW(_text);
 	unsigned int charSize = (_pixelScale * 8);
@@ -77,54 +77,54 @@ void bcDrawText(Font _font, wchar_t* _text, const unsigned char _pixelScale, bcR
 		if (_text[i] == L' ')
 			charID = 32;
 
-		if (_text[i] == L'!')
-			charID = 33;
+		//if (_text[i] == L'!')
+			//charID = 33;
 
-		if (_text[i] == L',')
-			charID = 34;
+		//if (_text[i] == L',')
+			//charID = 34;
 
-		if (_text[i] == L'?')
-			charID = 35;
+		//if (_text[i] == L'?')
+			//charID = 35;
 
-		if (_text[i] == L'#')
-			charID = 36;
+		//if (_text[i] == L'#')
+			//charID = 36;
 
-		if (_text[i] == L'\'')
-			charID = 37;
+		//if (_text[i] == L'\'')
+			//charID = 37;
 
-		if (_text[i] == L'(')
-			charID = 38;
+		//if (_text[i] == L'(')
+			//charID = 38;
 
-		if (_text[i] == L')')
-			charID = 39;
+		//if (_text[i] == L')')
+			//charID = 39;
 
-		if (_text[i] == L'[')
-			charID = 40;
+		//if (_text[i] == L'[')
+			//charID = 40;
 
-		if (_text[i] == L']')
-			charID = 41;
+		//if (_text[i] == L']')
+			//charID = 41;
 
-		if (_text[i] == L'+')
-			charID = 42;
+		//if (_text[i] == L'+')
+			//charID = 42;
 
-		if (_text[i] == L'-')
-			charID = 43;
+		//if (_text[i] == L'-')
+			//charID = 43;
 
-		if (_text[i] == L'=')
-			charID = 44;
+		//if (_text[i] == L'=')
+			//charID = 44;
 
-		if (_text[i] == L'_')
-			charID = 45;
+		//if (_text[i] == L'_')
+			//charID = 45;
 
-		if (_text[i] == L'.')
-			charID = 46;
+		//if (_text[i] == L'.')
+			//charID = 46;
 
 		if (_text[i] >= L'0' && _text[i] <= L'9')
 		{
 			charID = (_text[i] - L'0') + 47;
 		}
 
-		bcDrawTexture(g_Fonts[_font]._textures[charID], x, y, SYMBOL_WIDTH, SYMBOL_HEIGHT, _pixelScale);
+		bcDrawTexture(g_Fonts[_font]._textures[charID], x, y, charSize, charSize);
 
 	}
 }

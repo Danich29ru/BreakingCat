@@ -25,6 +25,9 @@
     <ClCompile Include="..\source\vars.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\source\map.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\source\common.h">
@@ -49,6 +52,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\source\vars.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\map.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

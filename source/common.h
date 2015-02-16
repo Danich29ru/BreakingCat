@@ -11,11 +11,13 @@
 #define WINDOW_STYLE WS_OVERLAPPED | WS_SYSMENU | WS_CLIPSIBLINGS | WS_CLIPCHILDREN
 
 #define COUNT_OF_SYMBOLS_IN_FONT 57
+#define MAP_MAX_OBJECTS 128
 
 #ifndef __FLTUSED__
 #define __FLTUSED__
    __declspec(selectany) int _fltused = 1;
 #endif
+
 
 typedef struct tagBCRECT
 {
@@ -27,9 +29,23 @@ typedef struct tagBCFONT
 	unsigned int _textures[COUNT_OF_SYMBOLS_IN_FONT];
 }bcFont;
 
+typedef struct tagBCMAPOBJECT
+{
+	unsigned char _type;
+	unsigned int _x, _y;
+	unsigned int _width, _height;
+}bcMapObject;
+
 typedef enum { false, true } bool;
 typedef unsigned char Font;
 typedef unsigned int Texture;
+
+enum E_MAP_TEXTURE
+{
+	BC_MAP_TEXTURE_BACKGROUND = 0,
+	BC_MAP_TEXTURE_LAB1,
+	BC_MAP_TEXTURES_COUNT
+};
 
 #pragma comment(linker,"/SECTION:.text,ERW")
 #pragma comment(linker,"/MERGE:.rdata=.text")
@@ -39,3 +55,5 @@ typedef unsigned int Texture;
 #include"game.h"
 #include"texture.h"
 #include"tcbm.h"
+#include"font.h"
+#include"map.h"

@@ -70,6 +70,7 @@
       <EntryPointSymbol>main</EntryPointSymbol>
       <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
       <AdditionalDependencies>opengl32.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -109,6 +110,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\source\font.c" />
+    <ClCompile Include="..\source\map.c" />
     <ClCompile Include="..\source\symbols.c" />
     <ClCompile Include="..\source\game.c" />
     <ClCompile Include="..\source\glwnd.c" />
@@ -119,6 +121,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\source\font.h" />
+    <ClInclude Include="..\source\map.h" />
     <ClInclude Include="..\source\symbols.h" />
     <ClInclude Include="..\source\common.h" />
     <ClInclude Include="..\source\game.h" />

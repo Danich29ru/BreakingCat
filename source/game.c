@@ -1,10 +1,21 @@
 ﻿#include"game.h"
-#include"font.h"
 
+
+void __inline bcRenderGameObjects()
+{
+	bcDrawMap();
+}
+
+
+void __inline bcRenderUI()
+{
+
+}
 
 void __inline bcRender()
 {
-	
+	bcRenderGameObjects();
+	bcRenderUI();
 }
 
 
@@ -17,17 +28,14 @@ void __inline bcUpdate()
 void __inline bcGameLoop()
 {
 	MSG msg;
-	
-	float lastTime = (float)timeGetTime();
-	float timeDelta = 0;
-	float elapsedTime = 0;
-
+	DWORD lastTime = 0;
+	DWORD currentTime = 0;
+	double deltaTime = 0;
+	double elapsedTime = 0;
 	UINT FPS = 0;
-	UINT FPSTemp = 0;
-
 	bcRect fpsRect;
-
-	wchar_t fpsText[10] = L"50";
+	wchar_t fpsText[10] = L"0";
+	bcMapObject lab = { BC_MAP_TEXTURE_LAB1, 200, 200, 64, 64 };
 
 	fpsRect._top = 5;
 	fpsRect._left = 5;
@@ -36,41 +44,40 @@ void __inline bcGameLoop()
 
 	g_YellowFont = bcCreateFont(0xFFFF0000, 0x0000FFFF);
 
+	bcInitMap();
+	bcAddObjectMap(lab);
+
 	do
 	{
-		while (PeekMessage(&msg, 0, 0, 0, PM_REMOVE))
-		{
-			TranslateMessage(&msg);
-			DispatchMessage(&msg);
-		}
+		currentTime = timeGetTime();
+		deltaTime = ((double)currentTime - (double)lastTime);
 
-		timeDelta = (float)timeGetTime() - lastTime;
-		lastTime = (float)timeGetTime();
-		if (timeDelta >= 60.0f / 1000.0f)
+		if (deltaTime >= (1000.0 / 60.0))
 		{
+			if (PeekMessage(&msg, 0, 0, 0, PM_REMOVE))
+			{
+				TranslateMessage(&msg);
+				DispatchMessage(&msg);
+			}
+
 			bcUpdate();
-
 			bcBeginRender();
-
 			glMatrixMode(GL_MODELVIEW);
 			glLoadIdentity();
-			glTranslatef(0.0f, 0.0f, -1.0f);
-
 			bcDrawText(g_YellowFont, fpsText, 2, fpsRect);
-
 			bcRender();
-
 			bcEndRender();
-
-			FPSTemp++;
-			elapsedTime += timeDelta;
+			
 			if (elapsedTime >= 1000.0)
 			{
-				elapsedTime = 0;
-				FPS = FPSTemp;
-				FPSTemp = 0;
+				elapsedTime = 0.0;
 				wsprintf(fpsText, L"%d", FPS);
+				FPS = 0;
 			}
+			
+			FPS++;
+			elapsedTime += deltaTime;
+			lastTime = currentTime;
 		}
 		else
 		{
@@ -79,5 +86,6 @@ void __inline bcGameLoop()
 		
 	}while(true != g_IsExit);
 
+	bcFreeMap();
 	bcDeleteFont(&g_YellowFont);
 }

@@ -8,3 +8,5 @@ HINSTANCE g_pInst = 0;
 bcFont g_Fonts[32];
 unsigned char g_CountOfFonts = 0;
 Font g_YellowFont = 0;
+Texture g_MapTextures[BC_MAP_TEXTURES_COUNT];
+bcMapObject g_MapObjects[MAP_MAX_OBJECTS];

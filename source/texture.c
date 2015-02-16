@@ -30,7 +30,7 @@ void bcSetTextureData(Texture _texture, unsigned char _width, unsigned char _hei
 }
 
 
-void bcDrawTexture(Texture _texture, unsigned int _x, unsigned int _y, unsigned char _width, unsigned char _height, unsigned char _pixelsize)
+void bcDrawTexture(Texture _texture, unsigned int _x, unsigned int _y, unsigned int _width, unsigned int _height)
 {
 	double x, y, w, h;
 
@@ -38,8 +38,8 @@ void bcDrawTexture(Texture _texture, unsigned int _x, unsigned int _y, unsigned 
 
 	x = _x;
 	y = _y;
-	w = ((double)_width * (double)_pixelsize);
-	h = ((double)_height * (double)_pixelsize);
+	w = _width;
+	h = _height;
 
 	glBegin(GL_QUADS);
 	glTexCoord2d(1.0, 0.0);
