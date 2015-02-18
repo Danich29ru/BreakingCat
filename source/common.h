@@ -11,9 +11,6 @@
 #define WINDOW_STYLE WS_OVERLAPPED | WS_SYSMENU | WS_CLIPSIBLINGS | WS_CLIPCHILDREN
 
 #define COUNT_OF_SYMBOLS_IN_FONT 57
-#define MAP_MAX_OBJECTS 128
-
-#define UIBAR_SIZE 100
 
 #ifndef __FLTUSED__
 #define __FLTUSED__
@@ -23,7 +20,7 @@
 
 typedef struct tagBCRECT
 {
-	unsigned int _top, _bottom, _left, _right;
+	int _top, _bottom, _left, _right;
 }bcRect;
 
 typedef struct tagBCFONT
@@ -31,11 +28,10 @@ typedef struct tagBCFONT
 	unsigned int _textures[COUNT_OF_SYMBOLS_IN_FONT];
 }bcFont;
 
-typedef struct tagBCMAPOBJECT
+typedef struct tagBCMAPCELL
 {
 	unsigned char _type;
-	unsigned int _x, _y;
-}bcMapObject;
+}bcMapCell;
 
 typedef enum { false, true } bool;
 typedef unsigned char Font;
@@ -43,10 +39,17 @@ typedef unsigned int Texture;
 
 enum E_MAP_TEXTURE
 {
-	BC_MAP_TEXTURE_BACKGROUND = 0,
-	BC_MAP_TEXTURE_GREEN_QUAD,
-	BC_MAP_TEXTURE_LAB1,
-	BC_MAP_TEXTURES_COUNT
+	BC_MAP_BACKGROUND = 0,
+	BC_MAP_CELL_BACKGROUND,
+	BC_MAP_LAB,
+	BC_MAP_COUNT
+};
+
+enum BC_GAME_STATE
+{
+	BC_LOGO = 0,
+	BC_GAME,
+	BC_HELP
 };
 
 #pragma comment(linker,"/SECTION:.text,ERW")
@@ -59,3 +62,5 @@ enum E_MAP_TEXTURE
 #include"tcbm.h"
 #include"font.h"
 #include"map.h"
+#include"ui.h"
+#include"input.h"

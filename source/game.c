@@ -1,15 +1,35 @@
 ﻿#include"game.h"
 
+bool g_ShowFPS;
+
 
 void __inline bcRenderGameObjects()
 {
-	bcDrawMap();
+	if (g_GameState == BC_GAME)
+	{
+
+
+		bcMapDraw();
+	}
+
+	if (g_GameState == BC_LOGO)
+	{
+		bcDrawLogo();
+	}
 }
 
 
 void __inline bcRenderUI()
 {
+	if (g_GameState == BC_GAME)
+	{
+		
+	}
 
+	if (g_GameState == BC_HELP)
+	{
+		bcDrawHelpMessage();
+	}
 }
 
 
@@ -22,17 +42,32 @@ void __inline bcRender()
 
 void __inline bcUpdate()
 {
-	
+	if (g_GameState == BC_HELP)
+	{
+		bcHelpMsgUpdate();
+	}
+
+	if (g_GameState == BC_GAME)
+	{
+		if (GetAsyncKeyState(VK_F1))
+		{
+			g_GameState = BC_HELP;
+		}
+	}
+
+	if (GetAsyncKeyState(VK_F2))
+	{
+		g_ShowFPS = g_ShowFPS == true ? false : true;
+		Sleep(500);
+	}
 }
 
 
 void __inline bcGameInit()
 {
-	bcMapObject centralLab;
-	centralLab._type = BC_MAP_TEXTURE_LAB1;
-	centralLab._x = 5;
-	centralLab._y = 5;
-	bcAddObjectMap(centralLab);
+	g_GameState = BC_LOGO;
+	g_ShowFPS = false;
+
 }
 
 
@@ -45,10 +80,10 @@ void __inline bcGameShutdown()
 void __inline bcGameLoop()
 {
 	MSG msg;
-	DWORD lastTime = 0;
+	DWORD lastTime = timeGetTime();
 	DWORD currentTime = 0;
 	double deltaTime = 0;
-	double elapsedTime = 0;
+	double elapsedTime = 0.0;
 	UINT FPS = 0;
 	bcRect fpsRect;
 	wchar_t fpsText[10] = L"0";
@@ -59,9 +94,10 @@ void __inline bcGameLoop()
 	fpsRect._right = 50;
 
 	g_YellowFont = bcCreateFont(0xFFFF0000, 0x0000FFFF);
+	g_WhiteFont = bcCreateFont(0xFFFFFF00, 0x000000FF);
 
-	bcInitMap();
-
+	bcMapInitialize();
+	bcInitializeGameUI();
 	bcGameInit();
 
 	do
@@ -82,12 +118,21 @@ void __inline bcGameLoop()
 			glMatrixMode(GL_MODELVIEW);
 			glLoadIdentity();
 			bcRender();
-			bcDrawText(g_YellowFont, fpsText, 2, fpsRect);
+			if (g_ShowFPS == true)
+				bcDrawText(g_YellowFont, fpsText, 2, fpsRect);
 			bcEndRender();
 			
 			if (elapsedTime >= 1000.0)
 			{
-				elapsedTime = 0.0;
+				if (g_GameState != BC_LOGO)
+				{
+					elapsedTime = 0.0;
+				}
+				else if (elapsedTime >= 4000.0 && g_GameState == BC_LOGO)
+				{
+					g_GameState = BC_HELP;
+				}
+				
 				wsprintf(fpsText, L"%d", FPS);
 				FPS = 0;
 			}
@@ -105,6 +150,7 @@ void __inline bcGameLoop()
 
 	bcGameShutdown();
 
-	bcFreeMap();
+	bcMapShutdown();
 	bcDeleteFont(&g_YellowFont);
+	bcDeleteFont(&g_WhiteFont);
 }

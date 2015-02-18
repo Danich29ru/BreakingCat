@@ -1,101 +1,94 @@
-#include"common.h"
 #include"map.h"
+#include"maptextures.h"
 
-#define TILE_SIZE ((WINDOW_HEIGHT - UIBAR_SIZE) / 10)
+#define TILE_SIZE ((WINDOW_HEIGHT) / 10)
 
-#define X_OFFSET (WINDOW_WIDTH / 2 - (TILE_SIZE * 5))
+#define X_OFFSET 0
 #define Y_OFFSET 0
 
-void bcInitMap()
+bcMapCell g_Cells[100];
+
+void bcMapLoadTextures()
 {
-	unsigned char textureBackgroudData[] = 
-	{ 
-		0x00, 0x55, 0x00, 0x00
-	};
+	g_MapTextures[BC_MAP_BACKGROUND] = bcCreateTexture();
+	bcTCBMConvertToTexture(BC_MAP_BACKGROUND_Data, g_MapTextures[BC_MAP_BACKGROUND], 1, 1, 0x00330000, 0x000000FF);
+	g_MapTextures[BC_MAP_CELL_BACKGROUND] = bcCreateTexture();
+	bcTCBMConvertToTexture(BC_MAP_CELL_BACKGROUND_Data, g_MapTextures[BC_MAP_CELL_BACKGROUND], 1, 1, 0x00770000, 0x00660000);
+	g_MapTextures[BC_MAP_LAB] = bcCreateTexture();
+	bcTCBMConvertToTexture(BC_MAP_LAB_Data, g_MapTextures[BC_MAP_LAB], 16, 16, 0x44FF4400, 0x000000FF);
+}
 
-	unsigned char textureLab1[] = 
-	{
-		0xFF, 0xFF, 0x01, 0x80, 0xE1, 0x87,
-		0xC1, 0x83, 0xC1, 0x83, 0xC1, 0x83,
-		0xC1, 0x83, 0xC1, 0x83, 0xE1, 0x87,
-		0xF1, 0x8F, 0xF9, 0x9F, 0xFD, 0xBF,
-		0xFD, 0xBF, 0xF9, 0x9F, 0x01, 0x80,
-		0xFF, 0xFF,
-	};
 
-	unsigned char textureGreenQuad[] = 
-	{
-		0x7E, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0x7E,
-	};
+void bcMapFreeTextures()
+{
+	bcDeleteTexture(&(g_MapTextures[BC_MAP_LAB]));
+	bcDeleteTexture(&(g_MapTextures[BC_MAP_CELL_BACKGROUND]));
+	bcDeleteTexture(&(g_MapTextures[BC_MAP_BACKGROUND]));
+}
 
-	bcMapObject greenQuad;
 
+void bcMapInitialize()
+{
+	bcMapLoadTextures();
+}
+
+
+void bcMapShutdown()
+{
+	bcMapFreeTextures();
+}
+
+
+void bcMapDraw()
+{
 	int i = 0;
 
-	g_MapTextures[BC_MAP_TEXTURE_BACKGROUND] = bcCreateTexture();
-	bcSetTextureData(g_MapTextures[BC_MAP_TEXTURE_BACKGROUND], 1, 1, textureBackgroudData);
+	bcDrawTexture(g_MapTextures[BC_MAP_BACKGROUND], 0, 0, 800, 600);
 
-	g_MapTextures[BC_MAP_TEXTURE_LAB1] = bcCreateTexture();
-	bcTCBMConvertToTexture(textureLab1, g_MapTextures[BC_MAP_TEXTURE_LAB1], 16, 16, 0x44FF4400, 0x000000FF);
-
-	g_MapTextures[BC_MAP_TEXTURE_GREEN_QUAD] = bcCreateTexture();
-	bcTCBMConvertToTexture(textureGreenQuad, g_MapTextures[BC_MAP_TEXTURE_GREEN_QUAD], 8, 8, 0x00770000, 0x00660000);
-
-	greenQuad._type = BC_MAP_TEXTURE_GREEN_QUAD;
-	
 	for (i = 0; i < 10; i++)
 	{
 		int j = 0;
-		greenQuad._x = i;
-		
+
 		for (j = 0; j < 10; j++)
 		{
-			greenQuad._y = j;
-			bcAddObjectMap(greenQuad);
+			unsigned int x, y;
+
+			x = j * TILE_SIZE + X_OFFSET;
+			y = i * TILE_SIZE + Y_OFFSET;
+
+			bcDrawTexture(g_MapTextures[BC_MAP_CELL_BACKGROUND], x + 1, y + 1, TILE_SIZE - 1, TILE_SIZE - 1);
 		}
 	}
-}
 
-
-void bcDrawMap()
-{
-	int i = 0;
-	bcDrawTexture(g_MapTextures[BC_MAP_TEXTURE_BACKGROUND], 0, 0, 800, 600);
-
-	while (g_MapObjects[i]._type != 0 && i < MAP_MAX_OBJECTS)
+	for (i = 0; i < 10; i++)
 	{
-		unsigned int x, y;
+		int j = 0;
 
-		x = g_MapObjects[i]._x * TILE_SIZE + X_OFFSET;
-		y = g_MapObjects[i]._y * TILE_SIZE + Y_OFFSET;
-
-		bcDrawTexture(g_MapTextures[g_MapObjects[i]._type], x + 1, y + 1, TILE_SIZE - 1, TILE_SIZE - 1);
-		i++;
-	}
-}
-
-
-void bcFreeMap()
-{
-	bcDeleteTexture(&(g_MapTextures[BC_MAP_TEXTURE_BACKGROUND]));
-	bcDeleteTexture(&(g_MapTextures[BC_MAP_TEXTURE_GREEN_QUAD]));
-	bcDeleteTexture(&(g_MapTextures[BC_MAP_TEXTURE_LAB1]));
-}
-
-
-void bcAddObjectMap(bcMapObject _object)
-{
-	int i = 0;
-
-	while (i < MAP_MAX_OBJECTS)
-	{
-		if (g_MapObjects[i]._type == 0)
+		for (j = 0; j < 10; j++)
 		{
-			g_MapObjects[i]._type = _object._type;
-			g_MapObjects[i]._x = _object._x;
-			g_MapObjects[i]._y = _object._y;
-			break;
+			unsigned int x, y;
+
+			if (g_Cells[j*i + j]._type == 0)
+			{
+				continue;
+			}
+
+			x = j * TILE_SIZE + X_OFFSET;
+			y = i * TILE_SIZE + Y_OFFSET;
+
+			bcDrawTexture(g_MapTextures[g_Cells[j*i + j]._type], x + 1, y + 1, TILE_SIZE - 1, TILE_SIZE - 1);
 		}
-		i++;
 	}
+}
+
+
+void bcMapGetCell(const unsigned char _x, const unsigned char _y, bcMapCell* _object)
+{
+	(*_object) = g_Cells[_y * _x + _x];
+}
+
+
+void bcMapSetCell(const unsigned char _x, const unsigned char _y, bcMapCell _object)
+{
+	g_Cells[_y * _x + _x] = _object;
 }

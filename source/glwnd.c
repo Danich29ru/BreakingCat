@@ -16,6 +16,8 @@ LRESULT WINAPI bcWndProc(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam)
 bool __inline bcInitWnd()
 {
 	WNDCLASS wc = { 0 };
+	RECT rc;
+	UINT x, y, w, h;
 
 	g_pInst = GetModuleHandle(0);
 
@@ -32,7 +34,14 @@ bool __inline bcInitWnd()
 
 	RegisterClass(&wc);
 
-	g_hWnd = CreateWindow(WINDOW_NAME, WINDOW_NAME, WINDOW_STYLE, 100, 100, WINDOW_WIDTH, WINDOW_HEIGHT, 0, 0, g_pInst, 0);
+	SetRect(&rc, 0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
+	AdjustWindowRect(&rc, WINDOW_STYLE, FALSE);
+	x = 0;
+	y = 0;
+	w = rc.right - rc.left;
+	h = rc.bottom - rc.top;
+
+	g_hWnd = CreateWindow(WINDOW_NAME, WINDOW_NAME, WINDOW_STYLE, x, y, w, h, 0, 0, g_pInst, 0);
 
 	ShowWindow(g_hWnd, SW_NORMAL);
 	UpdateWindow(g_hWnd);

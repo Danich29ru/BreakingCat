@@ -16,7 +16,9 @@ Font bcCreateFont(const unsigned int _color, const unsigned int _color2)
 		bcTCBMConvertToTexture(bcGetSymbol(i), g_Fonts[g_CountOfFonts]._textures[i], SYMBOL_WIDTH, SYMBOL_HEIGHT, _color, _color2);
 	}
 
-	return (g_CountOfFonts);
+	g_CountOfFonts++;
+
+	return (g_CountOfFonts - 1);
 }
 
 
@@ -77,47 +79,47 @@ void bcDrawText(Font _font, wchar_t* _text, const int _pixelScale, bcRect _rc)
 		if (_text[i] == L' ')
 			charID = 32;
 
-		//if (_text[i] == L'!')
-			//charID = 33;
+		if (_text[i] == L'!')
+			charID = 33;
 
-		//if (_text[i] == L',')
-			//charID = 34;
+		if (_text[i] == L',')
+			charID = 34;
 
-		//if (_text[i] == L'?')
-			//charID = 35;
+		if (_text[i] == L'?')
+			charID = 35;
 
-		//if (_text[i] == L'#')
-			//charID = 36;
+		if (_text[i] == L'#')
+			charID = 36;
 
-		//if (_text[i] == L'\'')
-			//charID = 37;
+		if (_text[i] == L'\'')
+			charID = 37;
 
-		//if (_text[i] == L'(')
-			//charID = 38;
+		if (_text[i] == L'(')
+			charID = 38;
 
-		//if (_text[i] == L')')
-			//charID = 39;
+		if (_text[i] == L')')
+			charID = 39;
 
-		//if (_text[i] == L'[')
-			//charID = 40;
+		if (_text[i] == L'[')
+			charID = 40;
 
-		//if (_text[i] == L']')
-			//charID = 41;
+		if (_text[i] == L']')
+			charID = 41;
 
-		//if (_text[i] == L'+')
-			//charID = 42;
+		if (_text[i] == L'+')
+			charID = 42;
 
-		//if (_text[i] == L'-')
-			//charID = 43;
+		if (_text[i] == L'-')
+			charID = 43;
 
-		//if (_text[i] == L'=')
-			//charID = 44;
+		if (_text[i] == L'=')
+			charID = 44;
 
-		//if (_text[i] == L'_')
-			//charID = 45;
+		if (_text[i] == L'_')
+			charID = 45;
 
-		//if (_text[i] == L'.')
-			//charID = 46;
+		if (_text[i] == L'.')
+			charID = 46;
 
 		if (_text[i] >= L'0' && _text[i] <= L'9')
 		{
