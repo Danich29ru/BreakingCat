@@ -43,7 +43,7 @@ void bcMapDraw()
 {
 	int i = 0;
 
-	bcDrawTexture(g_MapTextures[BC_MAP_BACKGROUND], 0, 0, 800, 600);
+	bcDrawTexture(g_MapTextures[BC_MAP_BACKGROUND], 0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
 
 	for (i = 0; i < 10; i++)
 	{

@@ -33,11 +33,19 @@ void bcDeleteFont(Font* _font)
 	(*_font) = 0;
 }
 
+static unsigned int g_AdditionalPixels = 0;
+
+
+void bcSetAdditionalPixels(const unsigned int _n)
+{
+	g_AdditionalPixels = _n;
+}
+
 
 void bcDrawText(Font _font, wchar_t* _text, const int _pixelScale, bcRect _rc)
 {
 	unsigned int lenght = lstrlenW(_text);
-	unsigned int charSize = (_pixelScale * 8);
+	unsigned int charSize = (_pixelScale * 8) + g_AdditionalPixels;
 	unsigned int freeSpaceX = _rc._left - _rc._right;
 	unsigned int freeSpaceY = _rc._top - _rc._bottom;
 	unsigned int row = 0;

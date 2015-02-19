@@ -23,7 +23,7 @@ void __inline bcRenderUI()
 {
 	if (g_GameState == BC_GAME)
 	{
-		
+		bcDrawGameUI();
 	}
 
 	if (g_GameState == BC_HELP)
