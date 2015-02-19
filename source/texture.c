@@ -15,7 +15,7 @@ void bcDeleteTexture(Texture* _texture)
 }
 
 
-void bcSetTextureData(Texture _texture, unsigned char _width, unsigned char _height, unsigned char* _data)
+void bcSetTextureData(Texture _texture, unsigned int _width, unsigned int _height, unsigned char* _data)
 {
 	if(_texture == 0)
 		return;

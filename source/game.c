@@ -2,13 +2,41 @@
 
 bool g_ShowFPS;
 
+enum BC_BUTTON_ID
+{
+	BC_BUTTON_ADD_LAB = 0,
+	BC_BUTTON_ADD_FARM_VALERIANA,
+	BC_BUTTON_ADD_FARM_NEPETA,
+	BC_BUTTON_ADD_FARMER,
+	BC_BUTTON_ADD_CHEMIST,
+	BC_BUTTON_ADD_SELL_PRODUCT,
+};
+
+void bcOnButtonClick(int i)
+{
+	switch (i)
+	{
+	case BC_BUTTON_ADD_LAB:
+		break;
+	case BC_BUTTON_ADD_FARM_VALERIANA:
+		break;
+	case BC_BUTTON_ADD_FARM_NEPETA:
+		break;
+	case BC_BUTTON_ADD_FARMER:
+		break;
+	case BC_BUTTON_ADD_CHEMIST:
+		break;
+	case BC_BUTTON_ADD_SELL_PRODUCT:
+		break;
+	default:
+		break;
+	}
+}
 
 void __inline bcRenderGameObjects()
 {
 	if (g_GameState == BC_GAME)
 	{
-
-
 		bcMapDraw();
 	}
 
@@ -53,6 +81,8 @@ void __inline bcUpdate()
 		{
 			g_GameState = BC_HELP;
 		}
+
+		bcGameUIUpdate();
 	}
 
 	if (GetAsyncKeyState(VK_F2))

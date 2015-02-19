@@ -83,6 +83,7 @@ bool __inline bcInitGL()
 
 void __inline bcGLSetStartValues()
 {
+	RECT clientRect;
 	glEnable(GL_TEXTURE_2D);
 
 	//glEnable(GL_BLEND);
@@ -97,6 +98,11 @@ void __inline bcGLSetStartValues()
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
+
+	glClearColor(0.0f, 0.2f, 0.0f, 0.0f);
+	
+	GetClientRect(g_hWnd, &clientRect);
+	glViewport(clientRect.left, clientRect.top, clientRect.right - clientRect.left, clientRect.bottom - clientRect.top);
 }
 
 

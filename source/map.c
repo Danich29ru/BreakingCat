@@ -1,17 +1,12 @@
 #include"map.h"
 #include"maptextures.h"
 
-#define TILE_SIZE ((WINDOW_HEIGHT) / 10)
 
-#define X_OFFSET 0
-#define Y_OFFSET 0
 
 bcMapCell g_Cells[100];
 
 void bcMapLoadTextures()
 {
-	g_MapTextures[BC_MAP_BACKGROUND] = bcCreateTexture();
-	bcTCBMConvertToTexture(BC_MAP_BACKGROUND_Data, g_MapTextures[BC_MAP_BACKGROUND], 1, 1, 0x00330000, 0x000000FF);
 	g_MapTextures[BC_MAP_CELL_BACKGROUND] = bcCreateTexture();
 	bcTCBMConvertToTexture(BC_MAP_CELL_BACKGROUND_Data, g_MapTextures[BC_MAP_CELL_BACKGROUND], 1, 1, 0x00770000, 0x00660000);
 	g_MapTextures[BC_MAP_LAB] = bcCreateTexture();
@@ -23,7 +18,6 @@ void bcMapFreeTextures()
 {
 	bcDeleteTexture(&(g_MapTextures[BC_MAP_LAB]));
 	bcDeleteTexture(&(g_MapTextures[BC_MAP_CELL_BACKGROUND]));
-	bcDeleteTexture(&(g_MapTextures[BC_MAP_BACKGROUND]));
 }
 
 
@@ -43,22 +37,7 @@ void bcMapDraw()
 {
 	int i = 0;
 
-	bcDrawTexture(g_MapTextures[BC_MAP_BACKGROUND], 0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
-
-	for (i = 0; i < 10; i++)
-	{
-		int j = 0;
-
-		for (j = 0; j < 10; j++)
-		{
-			unsigned int x, y;
-
-			x = j * TILE_SIZE + X_OFFSET;
-			y = i * TILE_SIZE + Y_OFFSET;
-
-			bcDrawTexture(g_MapTextures[BC_MAP_CELL_BACKGROUND], x + 1, y + 1, TILE_SIZE - 1, TILE_SIZE - 1);
-		}
-	}
+	
 
 	for (i = 0; i < 10; i++)
 	{

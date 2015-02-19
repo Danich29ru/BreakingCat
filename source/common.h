@@ -12,6 +12,11 @@
 
 #define COUNT_OF_SYMBOLS_IN_FONT 57
 
+#define TILE_SIZE ((WINDOW_HEIGHT) / 10)
+
+#define X_OFFSET 0
+#define Y_OFFSET 0
+
 #ifndef __FLTUSED__
 #define __FLTUSED__
    __declspec(selectany) int _fltused = 1;
@@ -39,8 +44,7 @@ typedef unsigned int Texture;
 
 enum E_MAP_TEXTURE
 {
-	BC_MAP_BACKGROUND = 0,
-	BC_MAP_CELL_BACKGROUND,
+	BC_MAP_CELL_BACKGROUND = 0,
 	BC_MAP_LAB,
 	BC_MAP_COUNT
 };
